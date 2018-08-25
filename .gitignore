@@ -1,0 +1,6 @@
+node_modules
+Thumbs.db
+yarn.lock
+yarn-error.log
+run.bat
+.vscode

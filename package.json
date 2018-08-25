@@ -1,0 +1,21 @@
+{
+	"name": "redyt-server",
+	"version": "1.0.0",
+	"main": "index.ts",
+	"author": "moustaxx",
+	"license": "Apache-2.0",
+	"scripts": {
+		"start": "nodemon ./src/index.ts",
+		"tsc": "tsc",
+		"gpl2ts": "gql2ts schema.json"
+	},
+	"dependencies": {
+		"graphql-yoga": "^1.16.1",
+		"morgan": "^1.9.0",
+		"nodemon": "^1.18.3"
+	},
+	"devDependencies": {
+		"ts-node": "^7.0.1",
+		"typescript": "^3.0.1"
+	}
+}

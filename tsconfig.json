@@ -1,0 +1,36 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"jsx": "preserve",
+		"lib": ["es5", "es6", "esnext"],
+		"allowJs": true,
+		"checkJs": true,
+		"outDir": "./dist/",
+		"removeComments": true,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+
+		"strict": true,
+		"alwaysStrict": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictPropertyInitialization": true,
+		"noImplicitAny": true,
+		"noImplicitThis": true,
+
+		"noUnusedLocals": true,
+		"noUnusedParameters": false,
+		"noFallthroughCasesInSwitch": true,
+
+		"sourceMap": true,
+		"skipLibCheck": true
+	},
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}
