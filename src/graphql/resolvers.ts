@@ -1,45 +1,22 @@
-let links = [{
-	id: 'link-0',
-	url: 'www.howtographql.com',
-	description: 'Fullstack tutorial for GraphQL'
-}]
-
-let idCount = links.length;
+import Post from '../models/post';
 
 export default {
 	Query: {
 		info: () => 'This is the API of mine bieatch.',
-			feed: () => links
+		showPosts: async () => await Post.find()
 	},
 
 	Mutation: {
-		post: (root: any, args: any) => {
-			const link = {
-				id: `link-${idCount++}`,
-				description: args.description,
-				url: args.url,
-			}
-			links.push(link)
-			return link
-		},
-
-		updateLink: ({ }, { id, description, url }: any) => {
-			let link = links.find(x => x.id === id);
-			if (!link) throw new Error('404 kszysio not found');
-			link.description = description;
-			link.url = url;
-			return { id, description, url };
-		},
-
-		deleteLink: ({ }, { id }: any) => {
-			links = links.filter(l => l.id !== id);
-			return;
-		},
+		addPost: async ({ }, { title, description, author }: any) => {
+			const x = new Post({
+				title,
+				description,
+				author });
+			await x.save((err, x) => {
+				if (err) return console.error(err);
+			});
+			return x;
+		}
 	},
 
-	Link: {
-		id: (root: any) => root.id,
-		description: (root: any) => root.description,
-		url: (root: any) => root.url,
-	}
 };
