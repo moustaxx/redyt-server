@@ -16,6 +16,12 @@ export default {
 				if (err) return console.error(err);
 			});
 			return x;
+		},
+		deletePost: async ({ }, { id }: any) => {
+			await Post.findByIdAndRemove({ _id: id }, err => {
+				if (err) return console.error(err);
+			});
+			return { id };
 		}
 	},
 

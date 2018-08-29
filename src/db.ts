@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// import Post from './models/post';
 
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
