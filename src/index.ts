@@ -2,12 +2,12 @@ import { GraphQLServer } from 'graphql-yoga';
 import resolvers from './graphql/resolvers';
 import { startDB } from './db';
 
-const morgan = require('morgan');
+import morgan = require('morgan');
 
 startDB({
 	user: 'admin',
 	pwd: 'admin',
-	url: 'cluster0-q5i8e.mongodb.net/test?retryWrites=true'
+	url: 'cluster0-q5i8e.mongodb.net/redyt?retryWrites=true'
 });
 
 const server = new GraphQLServer({

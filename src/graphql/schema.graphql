@@ -1,11 +1,15 @@
 type Query {
 	info: String!
 	showPosts: [Post!]!
+	showUsers: [User!]!
 }
 
 type Mutation {
 	addPost(title: String!, description: String!, author: String!): Post!
 	deletePost(id: ID!): Post!
+	createUser(name: String!, password: String!, email: String!): User!
+	deleteUser(id: ID!): User!
+	# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 }
 
 type Post {
@@ -13,5 +17,13 @@ type Post {
 	title: String!
 	description: String!
 	author: String!
+	createdOn: String
+}
+
+type User {
+	id: ID!
+	name: String!
+	password: String!
+	email: String!
 	createdOn: String
 }
