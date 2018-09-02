@@ -11,19 +11,20 @@ const SubforumSchema = new mongoose.Schema({
 		required: true,
 	},
 	admins: {
-		type: String,
+		type: Array,
 		required: true,
 	},
 	moderators: {
-		type: String
+		type: Array
+
 	}
 });
 
 export interface ISubforum extends mongoose.Document {
-	title: string;
+	name: string;
 	description: string;
-	author: string;
-	subforum: string;
+	admins: [];
+	moderators: [];
 	createdOn: Date;
 }
 

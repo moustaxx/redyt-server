@@ -11,7 +11,7 @@ type Mutation {
 	deletePost(id: ID!): Post!
 	createUser(name: String!, password: String!, email: String!): User!
 	deleteUser(id: ID!): User!
-	addSubforum(name: String!, description: String!, admins: String!, moderators: String): Subforum!
+	addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String]): Subforum!
 	deleteSubforum(id: String!): Subforum!
 	# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 }
@@ -37,6 +37,6 @@ type Subforum {
 	id: ID!
 	name: String!
 	description: String!
-	admins: [String!]
+	admins: [String!]!
 	moderators: [String]
 }
