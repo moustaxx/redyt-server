@@ -2,15 +2,17 @@ import Post from '../../models/post';
 
 export const Query = {
 	info: () => 'This is the API of mine bieatch.',
-	showPosts: async () => await Post.find()
+	showPosts: async () => await Post.find(),
+	getPosts: async ({ }, { subforum }: any) => await Post.find({ subforum })
 };
 
 export const Mutation = {
-	addPost: async ({ }, { title, description, author }: any) => {
+	addPost: async ({ }, { title, description, author, subforum }: any) => {
 		const newPost = new Post({
 			title,
 			description,
-			author
+			author,
+			subforum
 		});
 		return await newPost.save();
 	},

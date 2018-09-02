@@ -1,7 +1,7 @@
 import mongoose = require('mongoose');
 
-const PostSchema = new mongoose.Schema({
-	title: {
+const SubforumSchema = new mongoose.Schema({
+	name: {
 		type: String,
 		required: true,
 		unique: true,
@@ -10,21 +10,16 @@ const PostSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	author: {
+	admins: {
 		type: String,
 		required: true,
 	},
-	subforum: {
-		type: String,
-		required: true,
-	},
-	createdOn: {
-		type: Date,
-		default: Date.now
-	},
+	moderators: {
+		type: String
+	}
 });
 
-export interface IPost extends mongoose.Document {
+export interface ISubforum extends mongoose.Document {
 	title: string;
 	description: string;
 	author: string;
@@ -32,4 +27,4 @@ export interface IPost extends mongoose.Document {
 	createdOn: Date;
 }
 
-export default mongoose.model<IPost>('Post', PostSchema);
+export default mongoose.model<ISubforum>('Subforum', SubforumSchema);

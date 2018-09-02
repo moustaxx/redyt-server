@@ -2,13 +2,17 @@ type Query {
 	info: String!
 	showPosts: [Post!]!
 	showUsers: [User!]!
+	getPosts(subforum: String!): [Post!]!
+	showSubforums: [Subforum!]!
 }
 
 type Mutation {
-	addPost(title: String!, description: String!, author: String!): Post!
+	addPost(title: String!, description: String!, author: String!, subforum: String!): Post!
 	deletePost(id: ID!): Post!
 	createUser(name: String!, password: String!, email: String!): User!
 	deleteUser(id: ID!): User!
+	addSubforum(name: String!, description: String!, admins: String!, moderators: String): Subforum!
+	deleteSubforum(id: String!): Subforum!
 	# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 }
 
@@ -17,6 +21,7 @@ type Post {
 	title: String!
 	description: String!
 	author: String!
+	subforum: String!
 	createdOn: String
 }
 
@@ -26,4 +31,12 @@ type User {
 	password: String!
 	email: String!
 	createdOn: String
+}
+
+type Subforum {
+	id: ID!
+	name: String!
+	description: String!
+	admins: [String!]
+	moderators: [String]
 }
