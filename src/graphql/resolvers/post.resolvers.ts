@@ -3,7 +3,8 @@ import Post from '../../models/post';
 export const Query = {
 	info: () => 'This is the API of mine bieatch.',
 	showPosts: async () => await Post.find(),
-	getPosts: async ({ }, { subforum }: any) => await Post.find({ subforum })
+	getPostsBySubforum: async ({ }, { subforum }: any) => await Post.find({ subforum }),
+	getPostByID: async ({ }, { id }: any) => await Post.find({ _id: id })
 };
 
 export const Mutation = {
