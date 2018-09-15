@@ -3,7 +3,7 @@ type Query {
 	showPosts: [Post!]!
 	showUsers: [User!]!
 	getPostsBySubforum(subforum: String!): [Post!]!
-	getPostByID(id: String!): [Post!]!
+	getPostByID(id: ID!): [Post!]!
 	showSubforums: [Subforum!]!
 }
 
