@@ -8,8 +8,9 @@ type Query {
 }
 
 type Mutation {
-	addPost(title: String!, description: String!, author: String!, subforum: String!): Post!
+	addPost(title: String!, description: String!, author: String!, subforum: ID!): Post!
 	deletePost(id: ID!): Post!
+	editPost(id: ID!): Post!
 	createUser(name: String!, password: String!, email: String!): User!
 	deleteUser(id: ID!): User!
 	addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String]): Subforum!

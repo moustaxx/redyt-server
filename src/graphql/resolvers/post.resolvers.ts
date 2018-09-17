@@ -20,5 +20,15 @@ export const Mutation = {
 	deletePost: async ({ }, { id }: any) => {
 		await Post.findByIdAndRemove({ _id: id });
 		return { id };
+	},
+	editPost: async ({ }, { id, title, description, author, subforum }: any) => {
+		const newPost = new Post({
+			title,
+			description,
+			author,
+			subforum
+		});
+		await Post.find({ _id: id });
+		return newPost;
 	}
 };
