@@ -23,12 +23,13 @@ export const Mutation = {
 	},
 	editPost: async ({ }, { id, title, description, author, subforum }: any) => {
 		const newPost = new Post({
+			id,
 			title,
 			description,
 			author,
 			subforum
 		});
-		await Post.find({ _id: id });
-		return newPost;
+		await Post.findByIdAndRemove({ _id: id });
+		return await newPost.save();
 	}
 };
