@@ -11,7 +11,8 @@ const PostSchema = new mongoose.Schema({
 		required: true,
 	},
 	author: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User',
 		required: true,
 	},
 	subforum: {
@@ -27,7 +28,7 @@ const PostSchema = new mongoose.Schema({
 export interface IPost extends mongoose.Document {
 	title: string;
 	description: string;
-	author: string;
+	author: any;
 	subforum: string;
 	createdOn: Date;
 }
