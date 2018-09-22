@@ -5,6 +5,7 @@ type Query {
 	getPostsBySubforum(subforum: ID!): [Post!]!
 	getPostByID(id: ID!): [Post!]!
 	showSubforums: [Subforum!]!
+	verifyLogin(name: String!, password: String!): [User!]!
 }
 
 type Mutation {

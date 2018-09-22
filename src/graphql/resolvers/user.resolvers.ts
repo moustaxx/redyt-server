@@ -2,7 +2,17 @@ import User from '../../models/user';
 import bcrypt = require('bcrypt');
 
 export const Query = {
-	showUsers: async () => await User.find()
+	showUsers: async () => await User.find(),
+	verifyLogin: async ({ }, { name, password }: any) => {
+		const userFromDB = await User.find({ name, password });
+		const validPassword = await bcrypt.compare(password, userFromDB[0].password);
+		if (!validPassword) return {
+			error: {
+				message: 'Wrong password'
+			}
+		};
+		return userFromDB;
+	}
 };
 
 export const Mutation = {
