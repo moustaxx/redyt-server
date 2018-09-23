@@ -4,10 +4,10 @@ import bcrypt = require('bcrypt');
 export const Query = {
 	showUsers: async () => await User.find(),
 	verifyLogin: async ({ }, { name, password }: any) => {
-		const userFromDB = await User.findOne({ name, password });
+		const userFromDB = await User.findOne({ name });
 		if (!userFromDB) throw new Error('User not found!');
 		const validPassword = await bcrypt.compare(password, userFromDB.password);
-		console.log(validPassword);
+		console.log(validPassword, password, userFromDB.password);
 		if (!validPassword) throw new Error('Wrong password!');
 		return {
 			message: 'Success!',

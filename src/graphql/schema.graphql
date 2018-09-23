@@ -21,8 +21,6 @@ type Mutation {
 
 type Message {
 	message: String
-	user: User
-	userFromDB: User
 }
 
 type Post {
