@@ -5,7 +5,7 @@ type Query {
 	getPostsBySubforum(subforum: ID!): [Post!]!
 	getPostByID(id: ID!): [Post!]!
 	showSubforums: [Subforum!]!
-	verifyLogin(name: String!, password: String!): [User!]!
+	verifyLogin(name: String!, password: String!): Message
 }
 
 type Mutation {
@@ -17,6 +17,12 @@ type Mutation {
 	addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String]): Subforum!
 	deleteSubforum(id: String!): Subforum!
 	# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
+}
+
+type Message {
+	message: String
+	user: User
+	userFromDB: User
 }
 
 type Post {

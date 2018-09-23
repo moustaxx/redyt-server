@@ -4,14 +4,19 @@ import bcrypt = require('bcrypt');
 export const Query = {
 	showUsers: async () => await User.find(),
 	verifyLogin: async ({ }, { name, password }: any) => {
-		const userFromDB = await User.find({ name, password });
-		const validPassword = await bcrypt.compare(password, userFromDB[0].password);
-		if (!validPassword) return {
-			error: {
-				message: 'Wrong password'
-			}
+		const userFromDB = await User.findOne({ name, password });
+		if (!userFromDB) throw new Error('User not found!');
+		const validPassword = await bcrypt.compare(password, userFromDB.password);
+		console.log(validPassword);
+		if (!validPassword) throw new Error('Wrong password!');
+		return {
+			message: 'Success!',
+			user: {
+				name,
+				password
+			},
+			userFromDB
 		};
-		return userFromDB;
 	}
 };
 
