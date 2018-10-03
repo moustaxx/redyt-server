@@ -1,5 +1,8 @@
 {
 	"compilerOptions": {
+		"typeRoots": [
+			"./typings"
+		],
 		"target": "es5",
 		"module": "commonjs",
 		"moduleResolution": "node",
@@ -10,8 +13,6 @@
 		"outDir": "./dist/",
 		"removeComments": true,
 		"downlevelIteration": true,
-		"experimentalDecorators": true,
-
 		"strict": true,
 		"alwaysStrict": true,
 		"strictNullChecks": true,
@@ -19,18 +20,12 @@
 		"strictPropertyInitialization": true,
 		"noImplicitAny": true,
 		"noImplicitThis": true,
-
 		"noUnusedLocals": true,
 		"noUnusedParameters": false,
 		"noFallthroughCasesInSwitch": true,
-
 		"sourceMap": true,
-		"skipLibCheck": true
 	},
 	"include": [
-		"src/**/*"
-	],
-	"exclude": [
-		"node_modules"
+		"./src"
 	]
 }

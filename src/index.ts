@@ -1,8 +1,14 @@
-import { GraphQLServer } from 'graphql-yoga';
-import resolvers from './graphql/resolvers';
-import { startDB } from './db';
-
+import express = require('express');
+import cookieParser = require('cookie-parser');
+import { ApolloServer } from 'apollo-server-express';
 import morgan = require('morgan');
+
+import startDB from './db';
+import typeDefs from './graphql/schema';
+import resolvers from './graphql/resolvers';
+import passportStrategies from './passport';
+
+passportStrategies();
 
 startDB({
 	user: 'admin',
@@ -10,11 +16,20 @@ startDB({
 	url: 'cluster0-q5i8e.mongodb.net/redyt?retryWrites=true'
 });
 
-const server = new GraphQLServer({
-	typeDefs: './src/graphql/schema.graphql',
-	resolvers
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	tracing: true,
+	playground: {
+		settings: { 'request.credentials': 'include', 'editor.cursorShape': 'line' } as any
+	},
 });
 
-server.express.use(morgan('dev'));
+const app = express();
+app.use(cookieParser());
+app.use(morgan('dev'));
+server.applyMiddleware({ app });
 
-server.start(() => console.log('Server is running on http://localhost:4000'));
+app.listen({ port: 4000 }, () =>
+	console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`),
+);

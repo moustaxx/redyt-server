@@ -10,16 +10,25 @@
 		"gpl2ts": "gql2ts schema.json"
 	},
 	"dependencies": {
-		"bcrypt": "^3.0.0",
+		"apollo-server-express": "^2.1.0",
+		"cookie-parser": "^1.4.3",
 		"graphql-yoga": "^1.16.2",
-		"mongoose": "^5.2.15",
+		"jsonwebtoken": "^8.3.0",
+		"mongoose": "^5.3.1",
 		"morgan": "^1.9.1",
-		"nodemon": "^1.18.4"
+		"nodemon": "^1.18.4",
+		"passport": "^0.4.0",
+		"passport-jwt": "^4.0.0",
+		"passport-local": "^1.0.0",
+		"passport-local-mongoose": "^5.0.1"
 	},
 	"devDependencies": {
-		"@types/bcrypt": "^2.0.0",
+		"@types/cookie-parser": "^1.4.1",
+		"@types/jsonwebtoken": "^7.2.8",
 		"@types/mongoose": "^5.2.13",
 		"@types/morgan": "^1.7.35",
+		"@types/passport-jwt": "^3.0.1",
+		"@types/passport-local-mongoose": "^4.0.11",
 		"ts-node": "^7.0.1",
 		"tslint": "^5.11.0",
 		"typescript": "^3.0.3"
