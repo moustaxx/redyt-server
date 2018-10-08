@@ -8,8 +8,8 @@ export default gql`
 		getPostsBySubforum(subforum: ID!): [Post!]!
 		getPostByID(id: ID!): [Post!]!
 		showSubforums: [Subforum!]!
-		verifyLogin(name: String!, password: String!): Message
-		verifyLoginMongoose(name: String!, password: String!): Message
+		verifyLogin(name: String!, password: String!): Token
+		verifyLoginMongoose(name: String!, password: String!): Token
 	}
 
 	type Mutation {
@@ -23,8 +23,8 @@ export default gql`
 		# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 	}
 
-	type Message {
-		message: String
+	type Token {
+		token: String
 	}
 
 	type Post {

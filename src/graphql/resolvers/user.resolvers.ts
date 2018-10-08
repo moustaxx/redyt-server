@@ -1,25 +1,15 @@
 import User from '../../models/user';
-import passport = require('passport');
 import jwt = require('jsonwebtoken');
+import { JWT_SECRET } from '../../index';
 
 export const Query = {
 	showUsers: async () => await User.find(),
-	verifyLogin: async ({ }, { name, password }: any) =>
-		new Promise((resolve, reject) => passport.authenticate('local', { session: false }, (err, user) => {
-			if (err) reject(err);
-			if (!user) reject('Invalid credentials.');
-
-			const message = jwt.sign({ id: user._id }, '6KdNxKLNrmCQy739', { expiresIn: 1200 });
-			resolve({ message });
-		})({ body: { name, password } })),
-	verifyLoginMongoose: async ({ }, { name, password }: any) => {
+	verifyLogin: async ({ }, { name, password }: any) => {
 		const { user } = await (User.authenticate as any)()(name, password);
-		console.log('xxx', user);
-		
 		if (!user) throw new Error('Invalid credentials.');
 
-		const message = jwt.sign({ id: user._id }, '6KdNxKLNrmCQy739', { expiresIn: 1200 });
-		return{ message };
+		const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: 1200 });
+		return{ token };
 	}
 };
 
