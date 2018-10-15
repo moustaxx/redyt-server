@@ -7,7 +7,9 @@ import startDB from './db';
 import typeDefs from './graphql/schema';
 import resolvers from './graphql/resolvers';
 import passportStrategies from './passport';
+import passport = require('passport');
 
+export const JWT_SECRET = '6KdNxK1LNrm42CQy739';
 passportStrategies();
 
 startDB({
@@ -20,6 +22,18 @@ const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	tracing: true,
+	context: async ({ req, res }: any) => {
+		const tokenOwner = await new Promise((resolve, reject) =>
+		passport.authenticate('jwt', { session: false }, (err, user) => {
+			if (err) reject(err);
+			if (!user) reject('Invalid credentials.');
+			resolve({ user });
+			}) (req, res) ).catch( reason => console.log(reason));
+		return {
+			res,
+			tokenOwner
+		};
+	},
 	playground: {
 		settings: { 'request.credentials': 'include', 'editor.cursorShape': 'line' } as any
 	},

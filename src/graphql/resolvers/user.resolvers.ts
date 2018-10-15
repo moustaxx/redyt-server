@@ -8,7 +8,7 @@ export const Query = {
 		const { user } = await (User.authenticate as any)()(name, password);
 		if (!user) throw new Error('Invalid credentials.');
 
-		const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: 1200 });
+		const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: 7200 });
 		return{ token };
 	}
 };
