@@ -1,30 +1,38 @@
 import mongoose = require('mongoose');
 
-const SubforumSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true,
-		unique: true,
+const SubforumSchema = new mongoose.Schema(
+	{
+		name: {
+			type: String,
+			required: true,
+			unique: true,
+			trim: true,
+		},
+		description: {
+			type: String,
+			required: true,
+			trim: true,
+		},
+		admins: {
+			type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+			required: true,
+		},
+		moderators: {
+			type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+		}
 	},
-	description: {
-		type: String,
-		required: true,
-	},
-	admins: {
-		type: Array,
-		required: true,
-	},
-	moderators: {
-		type: Array
-
+	{
+		collection: 'Subforum',
+		timestamps: true,
 	}
-});
+);
 
 export interface ISubforum extends mongoose.Document {
 	name: string;
 	description: string;
 	admins: [];
-	moderators: [];
+	moderators?: [];
+	updatedOn: Date;
 	createdOn: Date;
 }
 
