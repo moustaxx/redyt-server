@@ -13,7 +13,7 @@ export default gql`
 	}
 
 	type Mutation {
-		addPost(title: String!, description: String!, author: String!, subforum: ID!): Post!
+		addPost(title: String!, description: String!, author: ID!, subforum: ID!): Post!
 		deletePost(id: ID!): Post!
 		editPost(id: ID!, title: String!, description: String!, author: ID!, subforum: ID! ): Post!
 		createUser(name: String!, password: String!, email: String!): User!

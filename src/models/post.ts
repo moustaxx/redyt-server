@@ -16,7 +16,7 @@ const PostSchema = new mongoose.Schema({
 		required: true,
 	},
 	subforum: {
-		type: String,
+		type: mongoose.Schema.Types.ObjectId,
 		required: true,
 	},
 	createdOn: {
