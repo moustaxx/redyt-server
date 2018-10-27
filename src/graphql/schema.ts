@@ -7,6 +7,7 @@ export default gql`
 		showUsers: [User!]!
 		getPostsBySubforum(subforum: ID!): [Post!]!
 		getPostByID(id: ID!): [Post!]!
+		getSubforum(name: String!): Subforum!
 		showSubforums: [Subforum!]!
 		verifyLogin(name: String!, password: String!): Token
 		verifyLoginMongoose(name: String!, password: String!): Token
@@ -48,7 +49,7 @@ export default gql`
 		id: ID!
 		name: String!
 		description: String!
-		admins: [String!]!
-		moderators: [String]
+		admins: [ID!]!
+		moderators: [ID]
 	}
 `;

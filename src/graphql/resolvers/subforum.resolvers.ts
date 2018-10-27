@@ -1,7 +1,8 @@
 import Subforum from '../../models/subforum';
 
 export const Query = {
-	showSubforums: async () => await Subforum.find()
+	showSubforums: async () => await Subforum.find(),
+	getSubforum: async ({ }, { name }: any ) => await Subforum.findOne({ name }),
 };
 
 export const Mutation = {
