@@ -1,35 +1,40 @@
 import mongoose = require('mongoose');
 
-const PostSchema = new mongoose.Schema({
-	title: {
-		type: String,
-		required: true,
-		unique: true,
+const PostSchema = new mongoose.Schema(
+	{
+		title: {
+			type: String,
+			required: true,
+			trim: true,
+			unique: true,
+		},
+		description: {
+			type: String,
+			required: true,
+		},
+		author: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User',
+			required: true,
+		},
+		subforum: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Subforum',
+			required: true,
+		},
 	},
-	description: {
-		type: String,
-		required: true,
-	},
-	author: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User',
-		required: true,
-	},
-	subforum: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: true,
-	},
-	createdOn: {
-		type: Date,
-		default: Date.now
-	},
-});
+	{
+		collection: 'Post',
+		timestamps: true,
+	}
+);
 
 export interface IPost extends mongoose.Document {
 	title: string;
 	description: string;
 	author: any;
 	subforum: string;
+	updatedOn: Date;
 	createdOn: Date;
 }
 
