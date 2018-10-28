@@ -12,10 +12,10 @@ export const Query = {
 };
 
 export const Mutation = {
-	addPost: async ({ }, { title, description, author, subforum }: any) => {
+	addPost: async ({ }, { title, content, author, subforum }: any) => {
 		const newPost = new Post({
 			title,
-			description,
+			content,
 			author,
 			subforum
 		});
@@ -25,11 +25,11 @@ export const Mutation = {
 		await Post.findByIdAndRemove({ _id: id });
 		return { id };
 	},
-	editPost: async ({ }, { id, title, description, author, subforum }: any) => {
+	editPost: async ({ }, { id, title, content, author, subforum }: any) => {
 		const newPost = new Post({
 			id,
 			title,
-			description,
+			content,
 			author,
 			subforum
 		});

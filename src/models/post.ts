@@ -8,7 +8,7 @@ const PostSchema = new mongoose.Schema(
 			trim: true,
 			unique: true,
 		},
-		description: {
+		content: {
 			type: String,
 			required: true,
 		},
@@ -31,7 +31,7 @@ const PostSchema = new mongoose.Schema(
 
 export interface IPost extends mongoose.Document {
 	title: string;
-	description: string;
+	content: string;
 	author: any;
 	subforum: string;
 	updatedOn: Date;

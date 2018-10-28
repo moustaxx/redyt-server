@@ -14,9 +14,9 @@ export default gql`
 	}
 
 	type Mutation {
-		addPost(title: String!, description: String!, author: ID!, subforum: ID!): Post!
+		addPost(title: String!, content: String!, author: ID!, subforum: ID!): Post!
 		deletePost(id: ID!): Post!
-		editPost(id: ID!, title: String!, description: String!, author: ID!, subforum: ID! ): Post!
+		editPost(id: ID!, title: String!, content: String!, author: ID!, subforum: ID! ): Post!
 		createUser(name: String!, password: String!, email: String!): User!
 		deleteUser(id: ID!): User!
 		addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String]): Subforum!
@@ -31,7 +31,7 @@ export default gql`
 	type Post {
 		id: ID!
 		title: String!
-		description: String!
+		content: String!
 		author: User!
 		subforum: String!
 		createdOn: String
