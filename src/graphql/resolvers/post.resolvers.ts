@@ -8,7 +8,7 @@ export const Query = {
 		console.log('TOKEN OWNER:', tokenOwner);
 		return await Post.find({ subforum }).populate('author');
 	},
-	getPostByID: async ({ }, { id }: any) => await Post.find({ _id: id }).populate('author')
+	getPostByID: async ({ }, { id }: any) => await Post.findOne({ _id: id }).populate('author')
 };
 
 export const Mutation = {

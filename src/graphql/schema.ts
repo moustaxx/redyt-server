@@ -5,10 +5,10 @@ export default gql`
 		info: String!
 		showPosts: [Post!]!
 		showUsers: [User!]!
-		getPostsBySubforum(subforum: ID!): [Post!]!
-		getPostByID(id: ID!): [Post!]!
-		getSubforum(name: String!): Subforum!
 		showSubforums: [Subforum!]!
+		getPostsBySubforum(subforum: ID!): [Post!]!
+		getPostByID(id: ID!): Post!
+		getSubforum(name: String!): Subforum!
 		verifyLogin(name: String!, password: String!): Token
 		verifyLoginMongoose(name: String!, password: String!): Token
 	}
