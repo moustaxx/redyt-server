@@ -19,7 +19,7 @@ export default gql`
 		editPost(id: ID!, title: String!, content: String!, author: ID!, subforum: ID! ): Post!
 		createUser(name: String!, password: String!, email: String!): User!
 		deleteUser(id: ID!): User!
-		addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String]): Subforum!
+		addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String], colors: [String]): Subforum!
 		deleteSubforum(id: String!): Subforum!
 		# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 	}
@@ -51,5 +51,12 @@ export default gql`
 		description: String!
 		admins: [ID!]!
 		moderators: [ID]
+		colors: Colors
+	}
+
+	type Colors {
+		primary: String,
+		secondary: String,
+		tertiary: String
 	}
 `;

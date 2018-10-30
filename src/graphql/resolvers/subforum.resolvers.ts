@@ -6,12 +6,17 @@ export const Query = {
 };
 
 export const Mutation = {
-	addSubforum: async ({ }, { name, description, admins, moderators }: any) => {
+	addSubforum: async ({ }, { name, description, admins, moderators, colors }: any) => {
 		const newSubforum = new Subforum({
 			name,
 			description,
 			admins,
-			moderators
+			moderators,
+			colors: {
+				primary: colors[0],
+				secondary: colors[1],
+				tertiary: colors[2]
+			}
 		});
 		return await newSubforum.save();
 	},

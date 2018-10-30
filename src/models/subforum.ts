@@ -19,6 +19,17 @@ const SubforumSchema = new mongoose.Schema(
 		},
 		moderators: {
 			type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+		},
+		colors: {
+			primary: {
+				type: String
+			},
+			secondary: {
+				type: String
+			},
+			tertiary: {
+				type: String
+			},
 		}
 	},
 	{
@@ -32,6 +43,11 @@ export interface ISubforum extends mongoose.Document {
 	description: string;
 	admins: [];
 	moderators?: [];
+	colors: {
+		primary: { type: string, default: '#42adf0' },
+		secondary: { type: string, default: '#0d669e' },
+		tertiary: { type: string, default: '#24a0ed' },
+	};
 	updatedOn: Date;
 	createdOn: Date;
 }
