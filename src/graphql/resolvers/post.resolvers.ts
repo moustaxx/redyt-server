@@ -32,7 +32,7 @@ export const Mutation = {
 			author,
 			subforum
 		});
-		await Post.findByIdAndRemove({ _id: id });
+		await Post.findByIdAndRemove({ _id: id }); //  TODO findByIdAndUpdate
 		return await newPost.save();
 	}
 };

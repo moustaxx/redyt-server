@@ -24,5 +24,9 @@ export const Mutation = {
 	deleteUser: async ({ }, { id }: any) => {
 		await User.findByIdAndRemove({ _id: id });
 		return { id };
+	},
+	changeUserPwd: async ({ }, { id, password, newPassword }: any) => {
+		await User.findByIdAndUpdate({ _id: id }, { });
+		 //  TODO findByIdAndUpdate
 	}
 };
