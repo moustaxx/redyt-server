@@ -3,6 +3,8 @@ import cookieParser = require('cookie-parser');
 import { ApolloServer } from 'apollo-server-express';
 import morgan = require('morgan');
 
+require('dotenv').config();
+
 import startDB from './db';
 import typeDefs from './graphql/schema';
 import resolvers from './graphql/resolvers';
@@ -13,9 +15,9 @@ export const JWT_SECRET = '6KdNxK1LNrm42CQy739';
 passportStrategies();
 
 startDB({
-	user: 'admin',
-	pwd: 'admin',
-	url: 'cluster0-q5i8e.mongodb.net/redyt?retryWrites=true'
+	user: process.env.DB_USER,
+	pwd: process.env.DB_PASS,
+	url: process.env.DB_URL
 });
 
 const server = new ApolloServer({

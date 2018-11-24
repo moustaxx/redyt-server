@@ -4,3 +4,4 @@ yarn.lock
 yarn-error.log
 run.bat
 .vscode
+.env
