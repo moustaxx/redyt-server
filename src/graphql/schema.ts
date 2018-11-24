@@ -21,7 +21,7 @@ export default gql`
 		deleteUser(id: ID!): User!
 		addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String], colors: [String]): Subforum!
 		deleteSubforum(id: String!): Subforum!
-		changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
+		# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 	}
 
 	type Token {
