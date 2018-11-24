@@ -11,7 +11,6 @@ import resolvers from './graphql/resolvers';
 import passportStrategies from './passport';
 import passport = require('passport');
 
-export const JWT_SECRET = '6KdNxK1LNrm42CQy739';
 passportStrategies();
 
 startDB({
