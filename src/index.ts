@@ -2,7 +2,6 @@ import express = require('express');
 import cookieParser = require('cookie-parser');
 import { ApolloServer } from 'apollo-server-express';
 import morgan = require('morgan');
-
 require('dotenv').config();
 
 import startDB from './db';
@@ -12,12 +11,7 @@ import passportStrategies from './passport';
 import passport = require('passport');
 
 passportStrategies();
-
-startDB({
-	user: process.env.DB_USER,
-	pwd: process.env.DB_PASS,
-	url: process.env.DB_URL
-});
+startDB();
 
 const server = new ApolloServer({
 	typeDefs,

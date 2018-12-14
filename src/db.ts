@@ -3,8 +3,8 @@ import mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 
-const startDB = ({ user, pwd, url }: any) => {
-	mongoose.connect('mongodb+srv://' + user + ':' + pwd + '@' + url, { useNewUrlParser: true });
+const startDB = () => {
+	mongoose.connect(process.env.DB_URL as string, { useNewUrlParser: true });
 };
 
 mongoose.connection.on('error', console.error.bind(console, 'DB connection error'));
