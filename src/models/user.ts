@@ -25,8 +25,8 @@ const UserSchema = new mongoose.Schema(
 export interface IUser extends mongoose.PassportLocalDocument {
 	name: string;
 	email: string;
-	updatedOn: Date;
-	createdOn: Date;
+	updatedAt: Date;
+	createdAt: Date;
 }
 UserSchema.plugin(passportLocalMongoose, { usernameField: 'name' });
 export default mongoose.model<IUser>('User', UserSchema);

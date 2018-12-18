@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
+	scalar Date
+
 	type Query {
 		info: String!
 		showPosts: [Post!]!
@@ -34,7 +36,8 @@ export default gql`
 		content: String!
 		author: User!
 		subforum: String!
-		createdOn: String
+		createdAt: Date
+		updatedAt: Date
 	}
 
 	type User {
@@ -42,7 +45,7 @@ export default gql`
 		name: String!
 		password: String!
 		email: String!
-		createdOn: String
+		createdAt: Date
 	}
 
 	type Subforum {
@@ -52,6 +55,7 @@ export default gql`
 		admins: [ID!]!
 		moderators: [ID]
 		colors: Colors
+		createdAt: Date
 	}
 
 	type Colors {

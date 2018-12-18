@@ -48,8 +48,8 @@ export interface ISubforum extends mongoose.Document {
 		secondary: { type: string, default: '#0d669e' },
 		tertiary: { type: string, default: '#24a0ed' },
 	};
-	updatedOn: Date;
-	createdOn: Date;
+	updatedAt: Date;
+	createdAt: Date;
 }
 
 export default mongoose.model<ISubforum>('Subforum', SubforumSchema);

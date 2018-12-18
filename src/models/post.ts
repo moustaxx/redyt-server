@@ -34,8 +34,8 @@ export interface IPost extends mongoose.Document {
 	content: string;
 	author: any;
 	subforum: string;
-	updatedOn: Date;
-	createdOn: Date;
+	updatedAt: Date;
+	createdAt: Date;
 }
 
 export default mongoose.model<IPost>('Post', PostSchema);
