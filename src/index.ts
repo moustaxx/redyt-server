@@ -1,4 +1,7 @@
 import express = require('express');
+import mongoose = require('mongoose');
+import session = require('express-session');
+import connectMongo = require('connect-mongo');
 import cookieParser = require('cookie-parser');
 import { ApolloServer } from 'apollo-server-express';
 import morgan = require('morgan');
@@ -8,25 +11,38 @@ import startDB from './db';
 import typeDefs from './graphql/schema';
 import resolvers from './graphql/resolvers';
 import passportStrategies from './passport';
-import passport = require('passport');
 
-passportStrategies();
+const app = express();
+const MongoStore = connectMongo(session);
+app.use(session({
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection,
+		touchAfter: 12 * 3600 // 12h
+	}),
+	name: 'rid',
+	secret: process.env.SESSION_SECRET!,
+	resave: false,
+	saveUninitialized: false,
+	cookie: {
+		httpOnly: true,
+		secure: false, //TODO
+		sameSite: true,
+		maxAge: 1000 * 60 * 60 * 24 * 14 // 14 days
+	}
+}));
+passportStrategies(app);
 startDB();
 
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	tracing: true,
+	// tslint:disable-next-line:arrow-return-shorthand
 	context: async ({ req, res }: any) => {
-		const tokenOwner = await new Promise((resolve, reject) =>
-		passport.authenticate('jwt', { session: false }, (err, user) => {
-			if (err) reject(err);
-			if (!user) reject('Invalid credentials.');
-			resolve({ user });
-			}) (req, res) ).catch( reason => console.log(reason));
 		return {
+			req,
 			res,
-			tokenOwner
+			sessionOwner: req.user ? req.user.toObject() : undefined,
 		};
 	},
 	playground: {
@@ -34,7 +50,6 @@ const server = new ApolloServer({
 	},
 });
 
-const app = express();
 app.use(cookieParser());
 app.use(morgan('dev'));
 server.applyMiddleware({ app });

@@ -9,9 +9,9 @@ export const Query = {
 };
 
 export const Mutation = {
-	addPost: async ({ }, { title, content, author, subforum }: any, { tokenOwner }: any) => {
-		if (!tokenOwner) throw new Error('Auth error.');
-		console.log('TOKEN OWNER:', tokenOwner);
+	addPost: async ({ }, { title, content, author, subforum }: any, { sessionOwner }: any) => {
+		if (!sessionOwner) throw new Error('Auth error.');
+		console.log('SESSION OWNER:', sessionOwner);
 		const newPost = new Post({
 			title,
 			content,

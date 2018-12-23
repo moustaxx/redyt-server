@@ -1,14 +1,13 @@
 import User from '../../models/user';
-import jwt = require('jsonwebtoken');
 
 export const Query = {
 	showUsers: async () => await User.find(),
-	verifyLogin: async ({ }, { name, password }: any) => {
+	verifyLogin: async ({ }, { name, password }: any, { req }: any) => {
 		const { user } = await (User.authenticate as any)()(name, password);
 		if (!user) throw new Error('Invalid credentials. Log in failed!');
 
-		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, { expiresIn: 7200 });
-		return{ token };
+		// tslint:disable-next-line:no-empty
+		req!.logIn(user, (err: any) => {});
 	}
 };
 

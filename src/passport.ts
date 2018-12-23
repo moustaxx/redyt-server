@@ -1,21 +1,13 @@
 import passport = require('passport');
-import passportJWT = require('passport-jwt');
 import User from './models/user';
+import { Application } from 'express';
 
-const { Strategy, ExtractJwt } = passportJWT;
+export default (app: Application) => {
+	app.use(passport.initialize());
+	app.use(passport.session());
 
-
-export default () => {
-	const config = {
-		jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-		secretOrKey: process.env.JWT_SECRET
-	};
 	passport.use(User.createStrategy());
-	passport.use(new Strategy(config, (payload, done) => {
-		console.log('JWTStrategy');
-		const x = User.findOne({ _id: payload.id })
-			.then(user => done(null, user))
-			.catch(err => done(err));
-		return x;
-	}));
+
+	passport.serializeUser(User.serializeUser());
+	passport.deserializeUser(User.deserializeUser());
 };
