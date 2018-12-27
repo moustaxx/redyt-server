@@ -14,6 +14,8 @@ import passportStrategies from './passport';
 
 const app = express();
 const MongoStore = connectMongo(session);
+app.use(cookieParser());
+app.use(morgan('dev'));
 app.use(session({
 	store: new MongoStore({
 		mongooseConnection: mongoose.connection,
@@ -50,9 +52,11 @@ const server = new ApolloServer({
 	},
 });
 
-app.use(cookieParser());
-app.use(morgan('dev'));
-server.applyMiddleware({ app });
+server.applyMiddleware({
+	app, cors: {
+		origin: process.env.CORS_ORIGIN,
+		credentials: true
+	} });
 
 app.listen({ port: 4000 }, () =>
 	console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`),
