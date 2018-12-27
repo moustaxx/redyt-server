@@ -1,12 +1,18 @@
-import Subforum from '../../models/subforum';
+import Subforum, { ISubforum } from '../../models/subforum';
+
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+interface ISubforumRes extends Omit<ISubforum, 'colors'> {
+	colors: string[];
+}
 
 export const Query = {
 	showSubforums: async () => await Subforum.find(),
-	getSubforum: async ({ }, { name }: any ) => await Subforum.findOne({ name }),
+	getSubforum: async ({ }, { name }: ISubforumRes) => await Subforum.findOne({ name }),
 };
 
 export const Mutation = {
-	addSubforum: async ({ }, { name, description, admins, moderators, colors }: any) => {
+	addSubforum: async ({ }, { name, description, admins, moderators, colors }: ISubforumRes) => {
 		const newSubforum = new Subforum({
 			name,
 			description,
@@ -20,7 +26,7 @@ export const Mutation = {
 		});
 		return await newSubforum.save();
 	},
-	deleteSubforum: async ({ }, { id }: any) => {
+	deleteSubforum: async ({ }, { id }: ISubforumRes) => {
 		await Subforum.findByIdAndRemove({ _id: id });
 		return { id };
 	}

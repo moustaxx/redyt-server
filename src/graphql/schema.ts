@@ -11,8 +11,7 @@ export default gql`
 		getPostsBySubforum(subforum: ID!): [Post!]!
 		getPostByID(id: ID!): Post!
 		getSubforum(name: String!): Subforum!
-		verifyLogin(name: String!, password: String!): Token
-		verifyLoginMongoose(name: String!, password: String!): Token
+		verifyLogin(name: String!, password: String!): User!
 	}
 
 	type Mutation {
@@ -24,10 +23,6 @@ export default gql`
 		addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String], colors: [String]): Subforum!
 		deleteSubforum(id: String!): Subforum!
 		# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
-	}
-
-	type Token {
-		token: String
 	}
 
 	type Post {

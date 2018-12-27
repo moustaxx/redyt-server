@@ -32,7 +32,10 @@ const PostSchema = new mongoose.Schema(
 export interface IPost extends mongoose.Document {
 	title: string;
 	content: string;
-	author: any;
+	author: {
+		id: string;
+		name: string;
+	};
 	subforum: string;
 	updatedAt: Date;
 	createdAt: Date;

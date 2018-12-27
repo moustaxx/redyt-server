@@ -11,6 +11,7 @@ import startDB from './db';
 import typeDefs from './graphql/schema';
 import resolvers from './graphql/resolvers';
 import passportStrategies from './passport';
+import { IUser } from './models/user';
 
 const app = express();
 const MongoStore = connectMongo(session);
@@ -35,12 +36,18 @@ app.use(session({
 passportStrategies(app);
 startDB();
 
+export interface IApolloContext {
+	req: express.Request;
+	res: express.Response;
+	sessionOwner: IUser | undefined;
+}
+
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	tracing: true,
 	// tslint:disable-next-line:arrow-return-shorthand
-	context: async ({ req, res }: any) => {
+	context: async ({ req, res }: IApolloContext) => {
 		return {
 			req,
 			res,
