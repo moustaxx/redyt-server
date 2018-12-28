@@ -9,7 +9,7 @@ interface IUserRes extends IUser {
 export const Query = {
 	showUsers: async () => await User.find(),
 	verifyLogin: async ({ }, { name, password }: IUserRes, { req }: IApolloContext) => {
-		const { user } = await (User.authenticate)()(name, password);
+		const { user } = await User.authenticate()(name, password);
 		if (!user) throw new Error('Invalid credentials. Log in failed!');
 
 		// tslint:disable-next-line:no-empty
@@ -25,7 +25,7 @@ export const Mutation = {
 			name,
 			email
 		});
-		return await (User).register(newUser, password);
+		return await User.register(newUser, password);
 	},
 	deleteUser: async ({ }, { id }: IUserRes) => {
 		await User.findByIdAndRemove({ _id: id });

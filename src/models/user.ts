@@ -1,7 +1,7 @@
 import mongoose = require('mongoose');
 import passportLocalMongoose = require('passport-local-mongoose');
 
-const UserSchema = new mongoose.Schema(
+const UserSchema: mongoose.PassportLocalSchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
 		collection: 'User',
 		timestamps: true,
 	}
-) as mongoose.PassportLocalSchema;
+);
 
 export interface IUser extends mongoose.PassportLocalDocument {
 	name: string;
@@ -29,4 +29,4 @@ export interface IUser extends mongoose.PassportLocalDocument {
 	createdAt: Date;
 }
 UserSchema.plugin(passportLocalMongoose, { usernameField: 'name' });
-export default mongoose.model<IUser>('User', UserSchema);
+export default mongoose.model<IUser>('User', UserSchema) as mongoose.PassportLocalModel<IUser>;

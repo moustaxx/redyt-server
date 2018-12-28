@@ -3,6 +3,7 @@ import { Query as UserQuery, Mutation as UserMutation } from './user.resolvers';
 import { Query as SubforumQuery, Mutation as SubforumMutation } from './subforum.resolvers';
 
 import { GraphQLDateTime } from 'graphql-iso-date';
+import { IResolvers } from 'graphql-tools';
 
 export default {
 	Date: GraphQLDateTime,
@@ -16,4 +17,4 @@ export default {
 		UserMutation,
 		SubforumMutation
 	),
-};
+} as IResolvers;
