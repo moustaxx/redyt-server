@@ -11,20 +11,16 @@ export const Query = {
 	verifyLogin: async ({ }, { name, password }: IUserRes, { req }: IApolloContext) => {
 		const { user } = await User.authenticate()(name, password);
 		if (!user) throw new Error('Invalid credentials. Log in failed!');
-
-		// tslint:disable-next-line:no-empty
-		req!.logIn(user, (err: any) => { throw new Error('Log in failed! ' + err); });
-
+		req!.logIn(user, (err: any) => {
+			if (err) throw new Error('Passport error! Log in failed!');
+		});
 		return user;
 	}
 };
 
 export const Mutation = {
 	createUser: async ({ }, { name, password, email }: IUserRes) => {
-		const newUser = new User({
-			name,
-			email
-		});
+		const newUser = new User({ name, email });
 		return await User.register(newUser, password);
 	},
 	deleteUser: async ({ }, { id }: IUserRes) => {
