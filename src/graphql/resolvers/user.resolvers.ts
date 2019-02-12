@@ -1,5 +1,6 @@
 import User, { IUser } from '../../models/user';
 import { IApolloContext } from '../..';
+import { setIsAuthCookie } from '../../utils/auth';
 
 interface IUserRes extends IUser {
 	password: string;
@@ -8,9 +9,10 @@ interface IUserRes extends IUser {
 
 export const Query = {
 	showUsers: async () => await User.find(),
-	verifyLogin: async ({ }, { name, password }: IUserRes, { req }: IApolloContext) => {
+	verifyLogin: async ({ }, { name, password }: IUserRes, { req, res }: IApolloContext) => {
 		const { user } = await User.authenticate()(name, password);
 		if (!user) throw new Error('Invalid credentials. Log in failed!');
+		setIsAuthCookie(res, true);
 		req!.logIn(user, (err: any) => {
 			if (err) throw new Error('Passport error! Log in failed!');
 		});
