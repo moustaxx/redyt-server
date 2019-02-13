@@ -11,6 +11,7 @@ export default gql`
 		getPostsBySubforum(subforum: ID!): [Post!]!
 		getPostByID(id: ID!): Post!
 		getSubforum(name: String!): Subforum!
+		getSessionOwner: User!
 		verifyLogin(name: String!, password: String!): User!
 	}
 

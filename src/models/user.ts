@@ -23,6 +23,7 @@ const UserSchema: mongoose.PassportLocalSchema = new mongoose.Schema(
 );
 
 export interface IUser extends mongoose.PassportLocalDocument {
+	id: string;
 	name: string;
 	email: string;
 	updatedAt: Date;

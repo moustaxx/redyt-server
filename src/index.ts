@@ -51,7 +51,7 @@ const server = new ApolloServer({
 		return {
 			req,
 			res,
-			sessionOwner: req.user ? req.user.toObject() : undefined,
+			sessionOwner: req.user ? req.user : undefined,
 		};
 	},
 	playground: {

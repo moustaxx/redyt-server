@@ -17,6 +17,11 @@ export const Query = {
 			if (err) throw new Error('Passport error! Log in failed!');
 		});
 		return user;
+	},
+	getSessionOwner: async ({ }, { }, { sessionOwner }: IApolloContext) => {
+		if (!sessionOwner) throw new Error('Session not found error!');
+		console.log('sessionOwner:', sessionOwner.id);
+		return sessionOwner;
 	}
 };
 
