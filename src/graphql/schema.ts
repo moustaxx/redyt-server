@@ -31,7 +31,7 @@ export default gql`
 		title: String!
 		content: String!
 		author: User!
-		subforum: String!
+		subforum: Subforum!
 		createdAt: Date
 		updatedAt: Date
 	}

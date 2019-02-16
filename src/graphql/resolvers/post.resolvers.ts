@@ -6,7 +6,7 @@ export const Query = {
 	showPosts: async () => await Post.find().populate('author'),
 	getPostsBySubforum: async ({ }, { subforum }: IPost) =>
 		await Post.find({ subforum }).populate('author'),
-	getPostByID: async ({ }, { id }: IPost) => await Post.findOne({ _id: id }).populate('author')
+	getPostByID: async ({ }, { id }: IPost) => await Post.findOne({ _id: id }).populate('author').populate('subforum')
 };
 
 export const Mutation = {
