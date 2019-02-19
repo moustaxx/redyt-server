@@ -22,6 +22,11 @@ export const Query = {
 		if (!sessionOwner) throw new Error('Session not found error!');
 		console.log('sessionOwner:', sessionOwner.id);
 		return sessionOwner;
+	},
+	getUserData: async ({ }, { id }: IUser) => {
+		const user = await User.findOne({_id: id});
+		if (!user) throw new Error('User not found!');
+		return user;
 	}
 };
 

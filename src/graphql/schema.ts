@@ -12,6 +12,7 @@ export default gql`
 		getPostByID(id: ID!): Post!
 		getSubforum(name: String!): Subforum!
 		getSessionOwner: User!
+		getUserData(id: ID!): User!
 		verifyLogin(name: String!, password: String!): User!
 	}
 
