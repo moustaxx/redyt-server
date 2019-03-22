@@ -1,6 +1,7 @@
 {
 	"ext": "ts,js",
+	"legacyWatch": true,
 	"execMap": {
-		"ts": "ts-node --pretty"
+		"ts": "ts-node --transpile-only"
 	}
 }
