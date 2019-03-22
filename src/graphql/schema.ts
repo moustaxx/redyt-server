@@ -61,4 +61,10 @@ export default gql`
 		secondary: String,
 		tertiary: String
 	}
+
+	type Votes {
+		summary: String,
+		likes: [String],
+		dislikes: [String]
+	}
 `;
