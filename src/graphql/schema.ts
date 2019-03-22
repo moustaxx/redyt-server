@@ -46,6 +46,13 @@ export default gql`
 		createdAt: Date
 	}
 
+	type Comment {
+		id: ID!
+		author: User!
+		content: String!
+		createdAt: Date
+	}
+
 	type Subforum {
 		id: ID!
 		name: String!
