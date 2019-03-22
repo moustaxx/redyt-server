@@ -10,6 +10,7 @@ export default gql`
 		showSubforums: [Subforum!]!
 		getPostsBySubforum(subforum: ID!): [Post!]!
 		getPostByID(id: ID!): Post!
+		getCommentsByPost(postID: ID!): [Comment!]
 		getSubforum(name: String!): Subforum!
 		getSessionOwner: User!
 		getUserByID(id: ID!): User!
@@ -22,6 +23,7 @@ export default gql`
 		deletePost(id: ID!): Post!
 		editPost(id: ID!, title: String!, content: String!, author: ID!, subforum: ID! ): Post!
 		createUser(name: String!, password: String!, email: String!): User!
+		createComment(content: String!, postID: ID!): Comment!
 		deleteUser(id: ID!): User!
 		addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String], colors: [String]): Subforum!
 		deleteSubforum(id: String!): Subforum!
