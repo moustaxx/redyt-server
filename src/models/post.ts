@@ -21,6 +21,10 @@ const PostSchema = new mongoose.Schema(
 			ref: 'Subforum',
 			required: true,
 		},
+		commentCounter: {
+			type: Number,
+			required: true,
+		}
 	},
 	{
 		collection: 'Post',
@@ -36,6 +40,7 @@ export interface IPost extends mongoose.Document {
 		name: string;
 	};
 	subforum: string;
+	commentCounter: number;
 	updatedAt: Date;
 	createdAt: Date;
 }

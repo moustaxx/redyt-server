@@ -36,6 +36,7 @@ export default gql`
 		content: String!
 		author: User!
 		subforum: Subforum!
+		commentCounter: Int!
 		createdAt: Date
 		updatedAt: Date
 	}
