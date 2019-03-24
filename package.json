@@ -5,7 +5,7 @@
 	"author": "moustaxx",
 	"license": "Apache-2.0",
 	"scripts": {
-		"start": "nodemon ./src/index.ts"
+		"start": "tsnd src/index.ts --pretty --respawn"
 	},
 	"dependencies": {
 		"apollo-server-express": "^2.4.2",
@@ -31,7 +31,7 @@
 		"@types/mongoose": "^5.3.23",
 		"@types/morgan": "^1.7.35",
 		"@types/passport-local-mongoose": "^4.0.12",
-		"ts-node": "^8.0.3",
+		"ts-node-dev": "^1.0.0-pre.32",
 		"tslint": "^5.14.0",
 		"typescript": "^3.3.4000"
 	}
