@@ -16,9 +16,8 @@
 		"express-session": "^1.15.6",
 		"graphql": "^14.2.1",
 		"graphql-iso-date": "^3.6.1",
-		"mongoose": "^5.4.22",
+		"mongoose": "^5.5.0",
 		"morgan": "^1.9.1",
-		"nodemon": "^1.18.10",
 		"passport": "^0.4.0",
 		"passport-local": "^1.0.0",
 		"passport-local-mongoose": "^5.0.1"
@@ -28,11 +27,11 @@
 		"@types/cookie-parser": "^1.4.1",
 		"@types/express-session": "^1.15.12",
 		"@types/graphql-iso-date": "^3.3.1",
-		"@types/mongoose": "^5.3.24",
+		"@types/mongoose": "^5.3.25",
 		"@types/morgan": "^1.7.35",
 		"@types/passport-local-mongoose": "^4.0.12",
 		"ts-node-dev": "^1.0.0-pre.32",
 		"tslint": "^5.15.0",
-		"typescript": "^3.4.1"
+		"typescript": "^3.4.3"
 	}
 }
