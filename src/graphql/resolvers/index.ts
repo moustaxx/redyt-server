@@ -6,8 +6,16 @@ import { Query as SubforumQuery, Mutation as SubforumMutation } from './subforum
 import { GraphQLDateTime } from 'graphql-iso-date';
 import { IResolvers } from 'graphql-tools';
 
+const id = ({ id, _id }: any) => id || String(_id);
+
 export default {
 	Date: GraphQLDateTime,
+
+	Comment: { id },
+	Post: { id },
+	User: { id },
+	Subforum: { id },
+	
 	Query: Object.assign({},
 		CommentQuery,
 		PostQuery,
