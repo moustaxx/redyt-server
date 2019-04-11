@@ -1,12 +1,36 @@
 import Post, { IPost } from '../../models/post';
 import { IApolloContext } from '../..';
 
+import { ApolloError } from 'apollo-server-core';
+import mongoose = require('mongoose');
+
 export const Query = {
 	info: () => 'This is the API of mine bieatch.',
 	showPosts: async () => await Post.find().populate('author'),
 	getPostsBySubforum: async ({ }, { subforum }: IPost) =>
 		await Post.find({ subforum }).populate('author'),
-	getPostByID: async ({ }, { id }: IPost) => await Post.findOne({ _id: id }).populate('author').populate('subforum')
+	getPostByID: async ({ }, { id }: IPost) => {
+		const [result] = await Post.aggregate([
+			{ $match: { _id: mongoose.Types.ObjectId(id) } },
+			{
+				$lookup: {
+					from: 'Comment',
+					pipeline: [
+						{ $match: { postID: mongoose.Types.ObjectId(id) } },
+						{ $lookup: { from: 'User', localField: 'author', foreignField: '_id', as: 'author' } },
+						{ $unwind: '$author' },
+					],
+					as: 'comments'
+				},
+			},
+			{ $lookup: { from: 'User', localField: 'author', foreignField: '_id', as: 'author' } },
+			{ $unwind: '$author' },
+			{ $lookup: { from: 'Subforum', localField: 'subforum', foreignField: '_id', as: 'subforum' } },
+			{ $unwind: '$subforum' },
+		]);
+		if (!result) throw new ApolloError('Something went wrong!');
+		return result;
+	}
 };
 
 export const Mutation = {
