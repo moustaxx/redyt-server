@@ -3,9 +3,7 @@ import { IApolloContext } from '../..';
 import { incrementComments } from '../../utils/commentCounter';
 
 export const Query = {
-	getCommentsByPost: async ({ }, { postID }: IComment) => {
-		return await Comment.find({ postID }).populate('author');
-	}
+
 };
 
 export const Mutation = {

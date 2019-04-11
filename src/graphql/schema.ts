@@ -10,7 +10,6 @@ export default gql`
 		showSubforums: [Subforum!]!
 		getPostsBySubforum(subforum: ID!): [Post!]!
 		getPostByID(id: ID!): Post!
-		getCommentsByPost(postID: ID!): [Comment!]
 		getSubforum(name: String!): Subforum!
 		getSessionOwner: User!
 		getUserByID(id: ID!): User!
@@ -37,6 +36,7 @@ export default gql`
 		author: User!
 		subforum: Subforum!
 		commentCounter: Int!
+		comments: [Comment]
 		createdAt: Date
 		updatedAt: Date
 	}
@@ -53,6 +53,7 @@ export default gql`
 		id: ID!
 		author: User!
 		content: String!
+		postID: ID!
 		createdAt: Date
 	}
 
