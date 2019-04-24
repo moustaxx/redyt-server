@@ -44,8 +44,6 @@ export interface IPost extends mongoose.Document {
 	createdAt: Date;
 	
 	commentCounter: number;
-	commentsOrder?: number;
-	postsOrder?: number;
 }
 
 export default mongoose.model<IPost>('Post', PostSchema);

@@ -2,14 +2,18 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
 	scalar Date
+	enum Order {
+		latest
+		oldest
+	}
 
 	type Query {
 		info: String!
 		showPosts: [Post!]!
 		showUsers: [User!]!
 		showSubforums: [Subforum!]!
-		getPostsBySubforum(subforum: ID!, postsOrder: Int): [Post!]!
-		getPostByID(id: ID!, commentsOrder: Int): Post!
+		getPostsBySubforum(subforum: ID!, postsOrder: Order = latest): [Post!]!
+		getPostByID(id: ID!, commentsOrder: Order = latest): Post!
 		getSubforum(name: String!): Subforum!
 		getSessionOwner: User!
 		getUserByID(id: ID!): User!

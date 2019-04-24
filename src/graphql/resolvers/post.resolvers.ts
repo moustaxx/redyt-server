@@ -7,9 +7,12 @@ import mongoose = require('mongoose');
 export const Query = {
 	info: () => 'This is the API of mine bieatch.',
 	showPosts: async () => await Post.find().populate('author'),
-	getPostsBySubforum: async ({ }, { subforum, postsOrder = -1 }: IPost) =>
-		await Post.find({ subforum }).populate('author').sort({ createdAt: postsOrder }),
-	getPostByID: async ({ }, { id, commentsOrder = -1 }: IPost) => {
+	getPostsBySubforum: async ({ }, { subforum, postsOrder }: IPost & { postsOrder: 'latest' | 'oldest' }) => {
+		const order = postsOrder === 'oldest' ? 1 : -1;
+		return await Post.find({ subforum }).populate('author').sort({ createdAt: order });
+	},
+	getPostByID: async ({ }, { id, commentsOrder }: IPost & { commentsOrder: 'latest' | 'oldest' }) => {
+		const order = commentsOrder === 'oldest' ? 1 : -1;
 		const [result] = await Post.aggregate([
 			{ $match: { _id: mongoose.Types.ObjectId(id) } },
 			{
@@ -17,7 +20,7 @@ export const Query = {
 					from: 'Comment',
 					pipeline: [
 						{ $match: { postID: mongoose.Types.ObjectId(id) } },
-						{ $sort: { createdAt: commentsOrder } },
+						{ $sort: { createdAt: order } },
 						{ $lookup: { from: 'User', localField: 'author', foreignField: '_id', as: 'author' } },
 						{ $unwind: '$author' },
 					],
