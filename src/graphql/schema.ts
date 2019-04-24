@@ -8,7 +8,7 @@ export default gql`
 		showPosts: [Post!]!
 		showUsers: [User!]!
 		showSubforums: [Subforum!]!
-		getPostsBySubforum(subforum: ID!): [Post!]!
+		getPostsBySubforum(subforum: ID!, postsOrder: Int): [Post!]!
 		getPostByID(id: ID!, commentsOrder: Int): Post!
 		getSubforum(name: String!): Subforum!
 		getSessionOwner: User!

@@ -7,8 +7,8 @@ import mongoose = require('mongoose');
 export const Query = {
 	info: () => 'This is the API of mine bieatch.',
 	showPosts: async () => await Post.find().populate('author'),
-	getPostsBySubforum: async ({ }, { subforum }: IPost) =>
-		await Post.find({ subforum }).populate('author'),
+	getPostsBySubforum: async ({ }, { subforum, postsOrder = -1 }: IPost) =>
+		await Post.find({ subforum }).populate('author').sort({ createdAt: postsOrder }),
 	getPostByID: async ({ }, { id, commentsOrder = -1 }: IPost) => {
 		const [result] = await Post.aggregate([
 			{ $match: { _id: mongoose.Types.ObjectId(id) } },
