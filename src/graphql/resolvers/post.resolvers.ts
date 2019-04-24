@@ -9,7 +9,7 @@ export const Query = {
 	showPosts: async () => await Post.find().populate('author'),
 	getPostsBySubforum: async ({ }, { subforum }: IPost) =>
 		await Post.find({ subforum }).populate('author'),
-	getPostByID: async ({ }, { id }: IPost) => {
+	getPostByID: async ({ }, { id, commentsOrder = -1 }: IPost) => {
 		const [result] = await Post.aggregate([
 			{ $match: { _id: mongoose.Types.ObjectId(id) } },
 			{
@@ -17,6 +17,7 @@ export const Query = {
 					from: 'Comment',
 					pipeline: [
 						{ $match: { postID: mongoose.Types.ObjectId(id) } },
+						{ $sort: { createdAt: commentsOrder } },
 						{ $lookup: { from: 'User', localField: 'author', foreignField: '_id', as: 'author' } },
 						{ $unwind: '$author' },
 					],
