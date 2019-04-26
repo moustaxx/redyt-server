@@ -67,19 +67,19 @@ export default gql`
 		description: String!
 		admins: [ID!]!
 		moderators: [ID]
-		colors: Colors
+		colors: Colors!
 		createdAt: Date
 	}
 
 	type Colors {
-		primary: String,
-		secondary: String,
-		tertiary: String
+		primary: String!
+		secondary: String!
+		tertiary: String!
 	}
 
 	type Votes {
-		summary: String,
-		likes: [String],
+		summary: String
+		likes: [String]
 		dislikes: [String]
 	}
 `;

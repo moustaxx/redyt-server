@@ -12,7 +12,8 @@ export const Query = {
 };
 
 export const Mutation = {
-	addSubforum: async ({ }, { name, description, admins, moderators, colors }: ISubforumRes) => {
+	addSubforum: async ({ }, { name, description, admins, moderators,
+		colors = ['#33a8ff', '#0079d3', '#0459e3'] }: ISubforumRes) => {
 		const newSubforum = new Subforum({
 			name,
 			description,
