@@ -1,33 +1,29 @@
 import Subforum, { ISubforum } from '../../models/subforum';
 
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
-interface ISubforumRes extends Omit<ISubforum, 'colors'> {
-	colors: string[];
-}
-
 export const Query = {
 	showSubforums: async () => await Subforum.find(),
-	getSubforum: async ({ }, { name }: ISubforumRes) => await Subforum.findOne({ name }),
+	getSubforum: async ({ }, { name }: ISubforum) => await Subforum.findOne({ name }),
 };
 
 export const Mutation = {
-	addSubforum: async ({ }, { name, description, admins, moderators,
-		colors = ['#33a8ff', '#0079d3', '#0459e3'] }: ISubforumRes) => {
-		const newSubforum = new Subforum({
-			name,
-			description,
-			admins,
-			moderators,
-			colors: {
-				primary: colors[0],
-				secondary: colors[1],
-				tertiary: colors[2]
+	addSubforum: async ({ }, payload: ISubforum) => {
+		const colors = {
+			subforum: {
+				primary: '#42adf0',
+				secondary: '#0d669e',
+				tertiary: '#24a0ed',
+			},
+			button: {
+				primary: 'hsl(210, 79%, 46%)',
+				secondary: 'transparent',
 			}
-		});
+		};
+		
+		const newSubforum = new Subforum({ colors, ...payload });
 		return await newSubforum.save();
 	},
-	deleteSubforum: async ({ }, { id }: ISubforumRes) => {
+
+	deleteSubforum: async ({ }, { id }: ISubforum) => {
 		await Subforum.findByIdAndRemove({ _id: id });
 		return { id };
 	}

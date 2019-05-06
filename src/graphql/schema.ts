@@ -28,7 +28,8 @@ export default gql`
 		createUser(name: String!, password: String!, email: String!): User!
 		createComment(content: String!, postID: ID!): Comment!
 		deleteUser(id: ID!): User!
-		addSubforum(name: String!, description: String!, admins: [String]!, moderators: [String], colors: [String]): Subforum!
+		addSubforum(name: String!, description: String!, admins: [String]!,
+			moderators: [String], colors: ColorsInput): Subforum!
 		deleteSubforum(id: String!): Subforum!
 		# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 	}
@@ -72,9 +73,31 @@ export default gql`
 	}
 
 	type Colors {
+		subforum: SubforumColors!
+		button: ButtonColors!
+	}
+	type SubforumColors {
 		primary: String!
 		secondary: String!
 		tertiary: String!
+	}
+	type ButtonColors {
+		primary: String!
+		secondary: String!
+	}
+	
+	input ColorsInput {
+		subforum: SubforumColorsInput!
+		button: ButtonColorsInput!
+	}
+	input SubforumColorsInput {
+		primary: String!
+		secondary: String!
+		tertiary: String!
+	}
+	input ButtonColorsInput {
+		primary: String!
+		secondary: String!
 	}
 
 	type Votes {
