@@ -1,5 +1,14 @@
 import mongoose = require('mongoose');
 
+const validColor = {
+	type: String,
+	required: true,
+	validate: {
+		validator: (value: string) => /(^#[0-9A-F]{3}$)|(^#[0-9A-F]{6}$)|(^#[0-9A-F]{8}$)/.test(value),
+		message: 'Invalid HEX color'
+	},
+};
+
 const SubforumSchema = new mongoose.Schema(
 	{
 		name: {
@@ -22,28 +31,13 @@ const SubforumSchema = new mongoose.Schema(
 		},
 		colors: {
 			subforum: {
-				primary: {
-					type: String,
-					required: true,
-				},
-				secondary: {
-					type: String,
-					required: true,
-				},
-				tertiary: {
-					type: String,
-					required: true,
-				},
+				primary: validColor,
+				secondary: validColor,
+				tertiary: validColor,
 			},
 			button: {
-				primary: {
-					type: String,
-					required: true,
-				},
-				secondary: {
-					type: String,
-					required: true,
-				},
+				primary: validColor,
+				secondary: validColor,
 			}
 		}
 	},
