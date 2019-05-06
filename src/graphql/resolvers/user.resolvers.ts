@@ -44,6 +44,13 @@ export const Mutation = {
 		await User.findByIdAndRemove({ _id: id });
 		return { id };
 	},
+	logOut: async ({ }, { }, { req, res, sessionOwner }: IApolloContext) => {
+		if (!sessionOwner) throw new Error('You are not logged in');
+		const user = sessionOwner;
+		setIsAuthCookie(res, false);
+		req.logOut();
+		return user;
+	},
 	// changeUserPwd: async ({ }, { id, password, newPassword }: IUserRes) => {
 	// 	await User.findByIdAndUpdate({ _id: id }, { });
 	// 	 //  TODO findByIdAndUpdate

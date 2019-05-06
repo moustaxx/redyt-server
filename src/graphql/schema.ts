@@ -31,6 +31,7 @@ export default gql`
 		addSubforum(name: String!, description: String!, admins: [String]!,
 			moderators: [String], colors: ColorsInput): Subforum!
 		deleteSubforum(id: String!): Subforum!
+		logOut: User!
 		# changeUserPwd(id: ID!, password: String!, newPassword: String!) TODO
 	}
 
@@ -49,7 +50,6 @@ export default gql`
 	type User {
 		id: ID!
 		name: String!
-		password: String!
 		email: String!
 		createdAt: Date
 	}
