@@ -22,9 +22,9 @@ export default gql`
 	}
 
 	type Mutation {
-		addSubforum(name: String!, description: String!, admins: [String]!,
-			moderators: [String], colors: ColorsInput): Subforum!
 		createPost(title: String!, content: String!, subforum: ID!): Post!
+		createSubforum(name: String!, description: String!, admins: [String]!,
+			moderators: [String], colors: ColorsInput): Subforum!
 		createUser(name: String!, password: String!, email: String!): User!
 		createComment(content: String!, postID: ID!): Comment!
 		deletePost(id: ID!): Post!

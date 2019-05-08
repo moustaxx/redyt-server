@@ -6,7 +6,7 @@ export const Query = {
 };
 
 export const Mutation = {
-	addSubforum: async ({ }, payload: ISubforum) => {
+	createSubforum: async ({ }, payload: ISubforum) => {
 		const colors = {
 			subforum: {
 				primary: '#42adf0',
