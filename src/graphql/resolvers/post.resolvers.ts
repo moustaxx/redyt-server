@@ -38,7 +38,7 @@ export const Query = {
 };
 
 export const Mutation = {
-	addPost: async ({ }, { title, content, subforum }: IPost, { sessionOwner }: IApolloContext) => {
+	createPost: async ({ }, { title, content, subforum }: IPost, { sessionOwner }: IApolloContext) => {
 		if (!sessionOwner) throw new Error('You must be logged in to add a post!');
 		const newPost = new Post({
 			title,
