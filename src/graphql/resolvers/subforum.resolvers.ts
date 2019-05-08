@@ -14,8 +14,8 @@ export const Mutation = {
 				tertiary: '#24a0ed',
 			},
 			button: {
-				primary: 'hsl(210, 79%, 46%)',
-				secondary: 'transparent',
+				primary: '#1975d2',
+				secondary: '#fffff00',
 			}
 		};
 		
