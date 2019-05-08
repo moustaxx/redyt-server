@@ -38,14 +38,14 @@ export const Query = {
 };
 
 export const Mutation = {
-	addPost: async ({ }, { title, content, author, subforum }: IPost, { sessionOwner }: IApolloContext) => {
-		if (!sessionOwner) throw new Error('Auth error.');
-		console.log('SESSION OWNER:', sessionOwner);
+	addPost: async ({ }, { title, content, subforum }: IPost, { sessionOwner }: IApolloContext) => {
+		if (!sessionOwner) throw new Error('You must be logged in to add a post!');
 		const newPost = new Post({
 			title,
 			content,
-			author,
-			subforum
+			author: sessionOwner,
+			subforum,
+			commentCounter: 0
 		});
 		return await newPost.save();
 	},
