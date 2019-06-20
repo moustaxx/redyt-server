@@ -25,7 +25,10 @@ const CommentSchema = new mongoose.Schema(
 
 export interface IComment extends mongoose.Document {
 	content: string;
-	author: string;
+	author: {
+		id: string;
+		name: string;
+	};
 	postID: string;
 	createdAt: string;
 }
