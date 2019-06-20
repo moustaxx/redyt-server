@@ -3,6 +3,7 @@ import { IApolloContext } from '../..';
 
 import { ApolloError } from 'apollo-server-core';
 import mongoose = require('mongoose');
+import { addPostToHistory } from '../../utils/userHistoryUtils';
 
 export const Query = {
 	info: () => 'This is the API of mine bieatch.',
@@ -47,6 +48,7 @@ export const Mutation = {
 			subforum,
 			commentCounter: 0
 		});
+		await addPostToHistory(newPost);
 		return await newPost.save();
 	},
 	deletePost: async ({ }, { id }: IPost) => {

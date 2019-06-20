@@ -15,6 +15,7 @@ export default gql`
 		getSessionOwner: User!
 		getUserByID(id: ID!): User!
 		getUserByName(name: String!): User!
+		getUserHistory(userID: ID!): UserHistory
 		showPosts: [Post!]!
 		showUsers: [User!]!
 		showSubforums: [Subforum!]!
@@ -51,6 +52,29 @@ export default gql`
 		name: String!
 		email: String!
 		createdAt: Date
+	}
+
+	type UserHistory {
+		userID: String!
+		votes: [UserVotes]
+		comments: [UserComments]
+		posts: [UserPosts]
+	}
+
+	type UserVotes {
+		voteType: String!
+		postID: String!
+		createdAt: Date!
+	}
+
+	type UserComments {
+		postID: String!
+		createdAt: Date!
+	}
+
+	type UserPosts {
+		postID: String!
+		createdAt: Date!
 	}
 
 	type Comment {

@@ -1,6 +1,7 @@
 import User, { IUser } from '../../models/user';
 import { IApolloContext } from '../..';
 import { setIsAuthCookie } from '../../utils/auth';
+import { createUserHistory } from '../../utils/userHistoryUtils';
 
 interface IUserRes extends IUser {
 	password: string;
@@ -38,7 +39,9 @@ export const Query = {
 export const Mutation = {
 	createUser: async ({ }, { name, password, email }: IUserRes) => {
 		const newUser = new User({ name, email });
-		return await User.register(newUser, password);
+		const data = await User.register(newUser, password) as IUser;
+		await createUserHistory(data.id);
+		return data;
 	},
 	deleteUser: async ({ }, { id }: IUserRes) => {
 		await User.findByIdAndRemove({ _id: id });
