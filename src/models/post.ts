@@ -24,7 +24,16 @@ const PostSchema = new mongoose.Schema(
 		commentCounter: {
 			type: Number,
 			required: true,
-		}
+		},
+		votes: [{
+			userID: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'User',
+				required: true,
+			},
+			voteType: String,
+			createdAt: Date
+		}],
 	},
 	{
 		collection: 'Post',
@@ -40,10 +49,15 @@ export interface IPost extends mongoose.Document {
 		name: string;
 	};
 	subforum: string;
+	commentCounter: number;
+	votes: {
+		userID: string;
+		voteType: string;
+		createdAt: Date;
+	};
+
 	updatedAt: Date;
 	createdAt: Date;
-	
-	commentCounter: number;
 }
 
 export default mongoose.model<IPost>('Post', PostSchema);

@@ -6,6 +6,10 @@ export default gql`
 		latest
 		oldest
 	}
+	enum VoteTypes {
+		like
+		dislike
+	}
 
 	type Query {
 		info: String!
@@ -33,7 +37,9 @@ export default gql`
 		deleteUser(id: ID!): User!
 		editPost(id: ID!, title: String!, content: String!, author: ID!, subforum: ID! ): Post!
 		logOut: User!
+		voteInPost(id: ID! voteType: VoteTypes): String!
 	}
+
 
 	type Post {
 		id: ID!
@@ -43,9 +49,17 @@ export default gql`
 		subforum: Subforum!
 		commentCounter: Int!
 		comments: [Comment]
+		votes: [PostVotes]
 		createdAt: Date
 		updatedAt: Date
 	}
+
+	type PostVotes {
+		voteType: String!
+		userID: String!
+		createdAt: Date!
+	}
+
 
 	type User {
 		id: ID!
@@ -77,6 +91,7 @@ export default gql`
 		createdAt: Date!
 	}
 
+
 	type Comment {
 		id: ID!
 		author: User!
@@ -84,6 +99,7 @@ export default gql`
 		postID: ID!
 		createdAt: Date
 	}
+
 
 	type Subforum {
 		id: ID!
@@ -94,6 +110,7 @@ export default gql`
 		colors: Colors!
 		createdAt: Date
 	}
+
 
 	type Colors {
 		subforum: SubforumColors!
@@ -123,9 +140,4 @@ export default gql`
 		secondary: String!
 	}
 
-	type Votes {
-		summary: String
-		likes: [String]
-		dislikes: [String]
-	}
 `;

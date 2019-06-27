@@ -65,5 +65,23 @@ export const Mutation = {
 		});
 		await Post.findByIdAndRemove({ _id: id }); //  TODO findByIdAndUpdate
 		return await newPost.save();
-	}
+	},
+	voteInPost: async (
+	{ },
+	{ id, voteType }: { id: string, voteType: 'like' | 'dislike' },
+	{ sessionOwner }: IApolloContext) => {
+		if (!sessionOwner) throw new Error('You must be logged in to vote!');
+		const newVote = {
+			userID: sessionOwner.id,
+			voteType,
+			createdAt: Date.now(),
+		};
+		const user = await Post.findOne({ userID: mongoose.Types.ObjectId(sessionOwner.id) });
+		console.log('sessionOwner.id:', sessionOwner.id);
+		console.log('user:', user);
+		if (user) throw new Error('You already voted!');
+		console.log('I FOUND IT HURRAY');
+		await Post.findOneAndUpdate({ _id: id }, { $push: { votes: newVote } });
+		return voteType;
+	},
 };
